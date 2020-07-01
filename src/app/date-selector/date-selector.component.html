@@ -1,1 +1,11 @@
-<p>date-selector works!</p>
+<section>
+  <i class="material-icons" (click)="changeCurrentDate(-1, 'year')">arrow_back</i>
+
+  <i class="material-icons" (click)="changeCurrentDate(-1, 'month')">keyboard_arrow_left</i>
+
+  <span>{{dateManagerService.date | async | moment }}</span>
+
+  <i class="material-icons" (click)="changeCurrentDate(1, 'month')">keyboard_arrow_right</i>
+
+  <i class="material-icons" (click)="changeCurrentDate(1, 'year')">arrow_forward</i>
+</section>
