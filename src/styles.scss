@@ -1,9 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
 
 :root {
-  --primary-color: #c4fb6d;
+  --primary-color: #12cad6;
   --dark-color: #393e46;
   --light-color: #f4f4f4;
+  --red-color: #fa1616;
 }
 
 * {
@@ -13,7 +14,7 @@
 }
 
 body {
-  font-family: 'Varela Round', sans-serif;
+  font-family: 'Pacifico', cursive;
   font-size: 1rem;
   line-height: 1.6;
   background-color: #fff;
@@ -84,6 +85,11 @@ table th {
 
 .btn-primary {
   background: var(--primary-color);
+  color: #fff;
+}
+
+.btn-remove {
+  background: var(--red-color);
   color: #fff;
 }
 
