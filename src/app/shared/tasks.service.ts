@@ -41,4 +41,9 @@ export class TasksService {
     return this.http
       .delete<void>(`${TasksService.databaseUrl}/${task.date}/${task.id}.json`);
   }
+
+  public removeAll(date: moment.Moment): Observable<void> {
+    return this.http
+      .delete<void>(`${TasksService.databaseUrl}/${date.format('DD-MM-YYYY')}.json`);
+  }
 }

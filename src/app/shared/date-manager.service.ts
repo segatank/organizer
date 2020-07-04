@@ -21,4 +21,8 @@ export class DateManagerService {
     });
     this.date.next(value);
   }
+
+  showToday(): void {
+    this.date.next(moment().locale('uk'));
+  }
 }

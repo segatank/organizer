@@ -1,11 +1,13 @@
 <section>
-  <i class="material-icons" (click)="changeCurrentDate(-1, 'year')">arrow_back</i>
+  <i class="material-icons" title="{{minusYear}}" (click)="changeCurrentDate(-1, 'year')">arrow_back</i>
 
-  <i class="material-icons" (click)="changeCurrentDate(-1, 'month')">keyboard_arrow_left</i>
+  <i class="material-icons" title="{{minusMonth}}" (click)="changeCurrentDate(-1, 'month')">keyboard_arrow_left</i>
 
   <span>{{dateManagerService.date | async | moment }}</span>
 
-  <i class="material-icons" (click)="changeCurrentDate(1, 'month')">keyboard_arrow_right</i>
+  <i class="material-icons" title="{{today}}" (click)="showToday()">today</i>
 
-  <i class="material-icons" (click)="changeCurrentDate(1, 'year')">arrow_forward</i>
+  <i class="material-icons" title="{{addMonth}}" (click)="changeCurrentDate(1, 'month')">keyboard_arrow_right</i>
+
+  <i class="material-icons" title="{{addYear}}" (click)="changeCurrentDate(1, 'year')">arrow_forward</i>
 </section>

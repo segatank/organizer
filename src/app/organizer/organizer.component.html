@@ -1,6 +1,9 @@
 <section>
   <header class="text-center">
     {{textOrganizer}} <strong>{{dateManagerService.date | async | moment: 'DD-MM-YYYY' }}</strong>
+    <button *ngIf="displayedTasks.length" class="btn btn-remove round-b el-fr" title="Remove" (click)="removeAll()">
+      <i class="material-icons">delete</i>
+    </button>
     <hr/>
   </header>
 
@@ -11,7 +14,7 @@
           <strong>{{i+1+'.'}}</strong>
           {{task.title}}
         </span>
-        <button class="btn btn-remove" title="Remove" (click)="remove(task)">
+        <button class="btn btn-remove round-b" title="Remove" (click)="removeSingle(task)">
           <i class="material-icons">delete</i>
         </button>
       </li>

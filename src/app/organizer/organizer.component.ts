@@ -54,9 +54,16 @@ export class OrganizerComponent implements OnInit {
     }, err => console.error(err));
   }
 
-  remove(task:Task): void {
+  removeSingle(task:Task): void {
     this.tasksService.remove(task).subscribe(() => {
         this.displayedTasks = this.displayedTasks.filter( t => t.id !== task.id)
+      }, error => console.error(error)
+    );
+  }
+
+  removeAll(): void {
+    this.tasksService.removeAll(this.dateManagerService.date.value).subscribe(() => {
+        this.displayedTasks = [];
       }, error => console.error(error)
     );
   }

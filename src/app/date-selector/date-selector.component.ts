@@ -9,6 +9,12 @@ import * as moment from 'moment';
   styleUrls: ['./date-selector.component.scss']
 })
 export class DateSelectorComponent {
+  addMonth = 'На місяць вперед';
+  minusMonth = 'На місяць назад';
+  addYear = 'На рік вперед';
+  minusYear = 'На рік назад';
+  today = 'Сьогодні';
+
   constructor(
     private dateManagerService: DateManagerService,
   ) {
@@ -16,6 +22,10 @@ export class DateSelectorComponent {
 
   public changeCurrentDate(value: number, time: moment.DurationInputArg2): void {
     this.dateManagerService.changeDate(value, time);
+  }
+
+  public showToday(): void {
+    this.dateManagerService.showToday();
   }
 
 }
