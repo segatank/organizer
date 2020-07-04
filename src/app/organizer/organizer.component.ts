@@ -4,6 +4,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {TasksService} from '../shared/tasks.service';
 import {Task} from '../shared/interfaces/task';
 import {switchMap} from 'rxjs/operators';
+import {ToasterService} from 'angular2-toaster';
 
 
 @Component({
@@ -15,12 +16,21 @@ export class OrganizerComponent implements OnInit {
   textOrganizer = 'Органайзер';
   textAddNewTask = 'Додати справу';
   textNoTasks = 'Справ немає';
+  popupTitleSuccess = 'Успішно';
+  popupTitleFail = 'Невдача';
+  popupMessageSaveTaskSuccess = 'Додано нове завдання.';
+  popupMessageSaveTaskFail = 'Завдання не було збережено.';
+  popupMessageDeleteTaskSuccess = 'Завдання було видалено.';
+  popupMessageDeleteTaskFail = 'Завдання не вдалося видалити.';
+  popupMessageDeleteAllSuccess = 'Список було очищено.';
+  popupMessageDeleteAllFail = 'Не вдалося очистити список.';
   form: FormGroup;
   displayedTasks: Task[] = [];
 
   constructor(
     private dateManagerService: DateManagerService,
     private tasksService: TasksService,
+    private toasterService: ToasterService,
   ) {
   }
 
@@ -49,22 +59,30 @@ export class OrganizerComponent implements OnInit {
     };
 
     this.tasksService.create(task).subscribe(t => {
-      this.displayedTasks.push(t);
-      this.form.reset();
-    }, err => console.error(err));
+        this.showPopup('success', this.popupTitleSuccess, this.popupMessageSaveTaskSuccess);
+        this.displayedTasks.push(t);
+        this.form.reset();
+      }, () => this.showPopup('error', this.popupTitleFail, this.popupMessageSaveTaskFail)
+    );
   }
 
-  removeSingle(task:Task): void {
+  removeSingle(task: Task): void {
     this.tasksService.remove(task).subscribe(() => {
-        this.displayedTasks = this.displayedTasks.filter( t => t.id !== task.id)
-      }, error => console.error(error)
+        this.displayedTasks = this.displayedTasks.filter(t => t.id !== task.id);
+        this.showPopup('success', this.popupTitleSuccess, this.popupMessageDeleteTaskSuccess);
+      }, () => this.showPopup('error', this.popupTitleFail, this.popupMessageDeleteTaskFail)
     );
   }
 
   removeAll(): void {
     this.tasksService.removeAll(this.dateManagerService.date.value).subscribe(() => {
         this.displayedTasks = [];
-      }, error => console.error(error)
+        this.showPopup('success', this.popupTitleSuccess, this.popupMessageDeleteAllSuccess);
+      }, () => this.showPopup('error', this.popupTitleFail, this.popupMessageDeleteAllFail)
     );
+  }
+
+  private showPopup(type: string, title: string, message: string): void {
+    this.toasterService.pop(type, title, message);
   }
 }
