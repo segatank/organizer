@@ -20,6 +20,8 @@ export class OrganizerComponent implements OnInit {
   popupTitleFail = 'Невдача';
   popupMessageSaveTaskSuccess = 'Додано нове завдання.';
   popupMessageSaveTaskFail = 'Завдання не було збережено.';
+  popupMessageUpdateTaskSuccess = 'Завдання було оновлено.';
+  popupMessageUpdateTaskFail = 'Завдання не було оновлено.';
   popupMessageDeleteTaskSuccess = 'Завдання було видалено.';
   popupMessageDeleteTaskFail = 'Завдання не вдалося видалити.';
   popupMessageDeleteAllSuccess = 'Список було очищено.';
@@ -64,6 +66,18 @@ export class OrganizerComponent implements OnInit {
         this.form.reset();
       }, () => this.showPopup('error', this.popupTitleFail, this.popupMessageSaveTaskFail)
     );
+  }
+
+  updateTask(event, task): void {
+    if (event.key === 'Enter') {
+      this.tasksService.update({id: task.id, title: event.target.textContent, date: task.date}).subscribe(() => {
+        this.showPopup('success', this.popupTitleSuccess, this.popupMessageUpdateTaskSuccess);
+      }, () => this.showPopup('error', this.popupTitleFail, this.popupMessageUpdateTaskFail));
+      event.target.blur();
+    } else if (event.key === 'Escape') {
+      event.target.textContent = task.title;
+      event.target.blur();
+    }
   }
 
   removeSingle(task: Task): void {

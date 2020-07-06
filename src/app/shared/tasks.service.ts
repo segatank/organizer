@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {map} from 'rxjs/operators'
+import {map} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 import {Task, CreateResponse} from './interfaces/task';
 
@@ -33,11 +33,20 @@ export class TasksService {
       .post<CreateResponse>(`${TasksService.databaseUrl}/${task.date}.json`, task)
       .pipe(
         map(res => {
-        return {...task, id: res.name};
-      }));
+          return {...task, id: res.name};
+        }));
   }
 
-  public remove(task:Task): Observable<void> {
+  public update(task: Task): Observable<Task> {
+    return this.http
+      .patch<CreateResponse>(`${TasksService.databaseUrl}/${task.date}/${task.id}.json`, task)
+      .pipe(
+        map(res => {
+          return {...task, id: res.name};
+        }));
+  }
+
+  public remove(task: Task): Observable<void> {
     return this.http
       .delete<void>(`${TasksService.databaseUrl}/${task.date}/${task.id}.json`);
   }
