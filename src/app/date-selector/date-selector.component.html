@@ -3,7 +3,7 @@
 
   <i class="material-icons" title="{{minusMonth}}" (click)="changeCurrentDate(-1, 'month')">keyboard_arrow_left</i>
 
-  <span>{{dateManagerService.date | async | moment }}</span>
+  <span>{{dateManagerService.date | async | moment | titlecase }}</span>
 
   <i class="material-icons" title="{{today}}" (click)="showToday()">today</i>
 

@@ -23,6 +23,13 @@ body {
   color: #333333;
 }
 
+[contenteditable="true"]:active,
+[contenteditable="true"]:focus{
+  border:none;
+  outline:none;
+  color: var(--primary-color);
+}
+
 a {
   color: var(--primary-color);
   text-decoration: none;
@@ -62,6 +69,7 @@ table th {
   background: var(--light-color);
   color: var(--dark-color);
   padding: .2rem .7rem;
+  font-family: 'Pacifico', cursive;
   font-size: 1rem;
   border: none;
   cursor: pointer;
@@ -76,7 +84,7 @@ table th {
   }
 
   &:hover:not(:disabled) {
-    opacity: .8;
+    opacity: .7;
   }
 
   &.round-b {

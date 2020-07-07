@@ -71,6 +71,7 @@ export class OrganizerComponent implements OnInit {
   updateTask(event, task): void {
     if (event.key === 'Enter') {
       this.tasksService.update({id: task.id, title: event.target.textContent, date: task.date}).subscribe(() => {
+        this.updateDisplayed(task.id, event.target.textContent);
         this.showPopup('success', this.popupTitleSuccess, this.popupMessageUpdateTaskSuccess);
       }, () => this.showPopup('error', this.popupTitleFail, this.popupMessageUpdateTaskFail));
       event.target.blur();
@@ -78,6 +79,14 @@ export class OrganizerComponent implements OnInit {
       event.target.textContent = task.title;
       event.target.blur();
     }
+  }
+
+  private updateDisplayed(taskId: string, newTitle: string): void {
+    this.displayedTasks.forEach(item => {
+      if (item.id === taskId) {
+        item.title = newTitle;
+      }
+    });
   }
 
   removeSingle(task: Task): void {
