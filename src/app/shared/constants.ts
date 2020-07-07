@@ -1,0 +1,14 @@
+export const REMOVE = 'Видалити';
+export const ORGANIZER = 'Органайзер';
+export const ADD_NEW_TASK = 'Додати справу';
+export const NO_TASKS = 'Справ немає';
+export const SUCCESS = 'Успішно';
+export const FAIL = 'Невдача';
+export const SAVE_TASK_SUCCESS = 'Додано нове завдання.';
+export const SAVE_TASK_FAIL = 'Завдання не було збережено.';
+export const UPDATE_TASK_SUCCESS = 'Завдання було оновлено.';
+export const UPDATE_TASK_FAIL = 'Завдання не було оновлено.';
+export const DELETE_TASK_SUCCESS = 'Завдання було видалено.';
+export const DELETE_TASK_FAIL = 'Завдання не вдалося видалити.';
+export const DELETE_ALL_TASKS_SUCCESS = 'Список було очищено.';
+export const DELETE_ALL_TASKS_FAIL = 'Не вдалося очистити список.';

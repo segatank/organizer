@@ -5,6 +5,22 @@ import {TasksService} from '../shared/tasks.service';
 import {Task} from '../shared/interfaces/task';
 import {switchMap} from 'rxjs/operators';
 import {ToasterService} from 'angular2-toaster';
+import {
+  REMOVE,
+  ORGANIZER,
+  ADD_NEW_TASK,
+  NO_TASKS,
+  SUCCESS,
+  FAIL,
+  SAVE_TASK_SUCCESS,
+  SAVE_TASK_FAIL,
+  UPDATE_TASK_SUCCESS,
+  UPDATE_TASK_FAIL,
+  DELETE_TASK_SUCCESS,
+  DELETE_TASK_FAIL,
+  DELETE_ALL_TASKS_SUCCESS,
+  DELETE_ALL_TASKS_FAIL,
+} from '../shared/constants';
 
 
 @Component({
@@ -13,19 +29,20 @@ import {ToasterService} from 'angular2-toaster';
   styleUrls: ['./organizer.component.scss']
 })
 export class OrganizerComponent implements OnInit {
-  textOrganizer = 'Органайзер';
-  textAddNewTask = 'Додати справу';
-  textNoTasks = 'Справ немає';
-  popupTitleSuccess = 'Успішно';
-  popupTitleFail = 'Невдача';
-  popupMessageSaveTaskSuccess = 'Додано нове завдання.';
-  popupMessageSaveTaskFail = 'Завдання не було збережено.';
-  popupMessageUpdateTaskSuccess = 'Завдання було оновлено.';
-  popupMessageUpdateTaskFail = 'Завдання не було оновлено.';
-  popupMessageDeleteTaskSuccess = 'Завдання було видалено.';
-  popupMessageDeleteTaskFail = 'Завдання не вдалося видалити.';
-  popupMessageDeleteAllSuccess = 'Список було очищено.';
-  popupMessageDeleteAllFail = 'Не вдалося очистити список.';
+  textRemove = REMOVE;
+  textOrganizer = ORGANIZER;
+  textAddNewTask = ADD_NEW_TASK;
+  textNoTasks = NO_TASKS;
+  popupTitleSuccess = SUCCESS;
+  popupTitleFail = FAIL;
+  popupMessageSaveTaskSuccess = SAVE_TASK_SUCCESS;
+  popupMessageSaveTaskFail = SAVE_TASK_FAIL;
+  popupMessageUpdateTaskSuccess = UPDATE_TASK_SUCCESS;
+  popupMessageUpdateTaskFail = UPDATE_TASK_FAIL;
+  popupMessageDeleteTaskSuccess = DELETE_TASK_SUCCESS;
+  popupMessageDeleteTaskFail = DELETE_TASK_FAIL;
+  popupMessageDeleteAllSuccess = DELETE_ALL_TASKS_SUCCESS;
+  popupMessageDeleteAllFail = DELETE_ALL_TASKS_FAIL;
   form: FormGroup;
   displayedTasks: Task[] = [];
 

@@ -1,7 +1,7 @@
 <section>
   <header class="text-center">
     {{textOrganizer}} <strong>{{dateManagerService.date | async | moment: 'DD-MM-YYYY' }}</strong>
-    <button *ngIf="displayedTasks.length" class="btn btn-remove round-b el-fr" title="Remove" (click)="removeAll()">
+    <button *ngIf="displayedTasks.length" class="btn btn-remove round-b el-fr" title="{{textRemove}}" (click)="removeAll()">
       <i class="material-icons">delete</i>
     </button>
     <hr/>
@@ -14,7 +14,7 @@
           <strong>{{i+1+'.'}}</strong>
           <span contenteditable="true" (keydown)="updateTask($event, task)">{{task.title}}</span>
         </span>
-        <button class="btn btn-remove round-b" title="Remove" (click)="removeSingle(task)">
+        <button class="btn btn-remove round-b" title="{{textRemove}}" (click)="removeSingle(task)">
           <i class="material-icons">delete</i>
         </button>
       </li>
@@ -32,7 +32,7 @@
         type="submit"
         class="btn btn-primary btn-block"
         [disabled]="form.invalid"
-        title="Add new item"
+        title="{{textAddNewTask}}"
       >
         {{textAddNewTask}}
       </button>
