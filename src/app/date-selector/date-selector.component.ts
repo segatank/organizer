@@ -1,6 +1,13 @@
 import {Component} from '@angular/core';
 import {DateManagerService} from '../shared/date-manager.service';
 import * as moment from 'moment';
+import {
+  ADD_MONTH,
+  MINUS_MONTH,
+  ADD_YEAR,
+  MINUS_YEAR,
+  TODAY
+} from '../shared/constants';
 
 
 @Component({
@@ -9,11 +16,11 @@ import * as moment from 'moment';
   styleUrls: ['./date-selector.component.scss']
 })
 export class DateSelectorComponent {
-  addMonth = 'На місяць вперед';
-  minusMonth = 'На місяць назад';
-  addYear = 'На рік вперед';
-  minusYear = 'На рік назад';
-  today = 'Сьогодні';
+  addMonth = ADD_MONTH;
+  minusMonth = MINUS_MONTH;
+  addYear = ADD_YEAR;
+  minusYear = MINUS_YEAR;
+  today = TODAY;
 
   constructor(
     private dateManagerService: DateManagerService,
@@ -27,5 +34,4 @@ export class DateSelectorComponent {
   public showToday(): void {
     this.dateManagerService.showToday();
   }
-
 }

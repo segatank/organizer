@@ -9,6 +9,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {ToasterModule} from 'angular2-toaster';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {TaskComponent} from './organizer/task/task.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     CalendarComponent,
     OrganizerComponent,
     DateSelectorComponent,
-    MomentPipe
+    MomentPipe,
+    TaskComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,9 @@
+<div class="task">
+  <span>
+    <strong>{{indexOfTask}}.</strong>
+    <span contenteditable="true" (keydown)="updateTask($event, task)">{{task.title}}</span>
+  </span>
+  <button class="btn btn-remove round-b" title="{{textRemove}}" (click)="removeSingle(task)">
+    <i class="material-icons">delete</i>
+  </button>
+</div>
