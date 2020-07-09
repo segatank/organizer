@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import * as moment from 'moment';
-import {DateManagerService} from '../shared/date-manager.service';
+import {DateManagerService} from '../shared/services/date-manager.service';
 import {Week} from '../shared/interfaces/weekdays';
 
 

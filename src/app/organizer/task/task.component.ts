@@ -1,8 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {Task} from '../../shared/interfaces/task';
-import {TasksService} from '../../shared/tasks.service';
-import {TasksListService} from '../../shared/tasks-list.service';
-import {ToasterService} from 'angular2-toaster';
+import {TasksService} from '../../shared/services/tasks.service';
+import {TasksListService} from '../../shared/services/tasks-list.service';
 import {
   FAIL,
   REMOVE,
@@ -12,6 +11,7 @@ import {
   UPDATE_TASK_FAIL,
   UPDATE_TASK_SUCCESS,
 } from '../../shared/constants';
+import {NotificationsService} from '../../shared/services/notifications.service';
 
 
 @Component({
@@ -33,7 +33,7 @@ export class TaskComponent {
   constructor(
     private tasksService: TasksService,
     private tasksList: TasksListService,
-    private toasterService: ToasterService,
+    private notificationService: NotificationsService,
   ) {
   }
 
@@ -41,8 +41,8 @@ export class TaskComponent {
     if ($event.key === 'Enter') {
       this.tasksService.update({id: task.id, title: $event.target.textContent, date: task.date}).subscribe(() => {
         this.tasksList.updateTask(task.id, $event.target.textContent);
-        this.showPopup('success', this.popupTitleSuccess, this.popupMessageUpdateTaskSuccess);
-      }, () => this.showPopup('error', this.popupTitleFail, this.popupMessageUpdateTaskFail));
+        this.notificationService.showPopup('success', this.popupTitleSuccess, this.popupMessageUpdateTaskSuccess);
+      }, () => this.notificationService.showPopup('error', this.popupTitleFail, this.popupMessageUpdateTaskFail));
       $event.target.blur();
     } else if ($event.key === 'Escape') {
       $event.target.textContent = task.title;
@@ -52,13 +52,9 @@ export class TaskComponent {
 
   public removeSingle(task: Task): void {
     this.tasksService.remove(task).subscribe(() => {
-      this.tasksList.removeTask(task);
-        this.showPopup('success', this.popupTitleSuccess, this.popupMessageDeleteTaskSuccess);
-      }, () => this.showPopup('error', this.popupTitleFail, this.popupMessageDeleteTaskFail)
+        this.tasksList.removeTask(task);
+        this.notificationService.showPopup('success', this.popupTitleSuccess, this.popupMessageDeleteTaskSuccess);
+      }, () => this.notificationService.showPopup('error', this.popupTitleFail, this.popupMessageDeleteTaskFail)
     );
-  }
-
-  private showPopup(type: string, title: string, message: string): void {
-    this.toasterService.pop(type, title, message);
   }
 }

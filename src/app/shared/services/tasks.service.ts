@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {map} from 'rxjs/operators';
 import {Observable} from 'rxjs';
-import {Task, CreateResponse} from './interfaces/task';
+import {Task, CreateResponse} from '../interfaces/task';
 
 
 @Injectable({

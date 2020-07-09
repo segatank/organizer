@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {DateManagerService} from '../shared/date-manager.service';
+import {DateManagerService} from '../shared/services/date-manager.service';
 import * as moment from 'moment';
 import {
   ADD_MONTH,
