@@ -18,19 +18,23 @@ export class TasksService {
 
   load(date: moment.Moment): Observable<Task[]> {
     return this.http
-      .get<Task[]>(`${TasksService.databaseUrl}/${date.format('DD-MM-YYYY')}.json`)
+      .get<Task[]>(`${TasksService.databaseUrl}/${date.format('YYYY')}/${date.format('MM')}/${date.format('DD')}.json`)
       .pipe(
-        map(tasks => {
-          if (!tasks) {
-            return [];
-          }
-          return Object.keys(tasks).map(key => ({...tasks[key], id: key}));
-        }));
+        map(tasks => tasks ? Object.keys(tasks).map(key => ({...tasks[key], id: key})) : [])
+      );
+  }
+
+  public getDaysWithTasksForMonth(date: moment.Moment): Observable<any> {
+    return this.http
+      .get<Task[]>(`${TasksService.databaseUrl}/${date.format('YYYY')}/${date.format('MM')}.json`)
+      .pipe(
+        map(tasks => tasks ? Object.keys(tasks).map(key => key) : [])
+      );
   }
 
   public create(task: Task): Observable<Task> {
     return this.http
-      .post<CreateResponse>(`${TasksService.databaseUrl}/${task.date}.json`, task)
+      .post<CreateResponse>(`${TasksService.databaseUrl}/${task.date.year}/${task.date.month}/${task.date.day}.json`, task)
       .pipe(
         map(res => {
           return {...task, id: res.name};
@@ -39,7 +43,7 @@ export class TasksService {
 
   public update(task: Task): Observable<Task> {
     return this.http
-      .patch<CreateResponse>(`${TasksService.databaseUrl}/${task.date}/${task.id}.json`, task)
+      .patch<CreateResponse>(`${TasksService.databaseUrl}/${task.date.year}/${task.date.month}/${task.date.day}/${task.id}.json`, task)
       .pipe(
         map(res => {
           return {...task, id: res.name};
@@ -48,11 +52,11 @@ export class TasksService {
 
   public remove(task: Task): Observable<void> {
     return this.http
-      .delete<void>(`${TasksService.databaseUrl}/${task.date}/${task.id}.json`);
+      .delete<void>(`${TasksService.databaseUrl}/${task.date.year}/${task.date.month}/${task.date.day}/${task.id}.json`);
   }
 
   public removeAll(date: moment.Moment): Observable<void> {
     return this.http
-      .delete<void>(`${TasksService.databaseUrl}/${date.format('DD-MM-YYYY')}.json`);
+      .delete<void>(`${TasksService.databaseUrl}/${date.format('YYYY')}/${date.format('MM')}/${date.format('DD')}.json`);
   }
 }

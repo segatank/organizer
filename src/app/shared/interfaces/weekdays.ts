@@ -6,6 +6,7 @@ interface Day {
   active: boolean;
   disabled: boolean;
   selected: boolean;
+  hasTasks: boolean;
 }
 
 export interface Week {

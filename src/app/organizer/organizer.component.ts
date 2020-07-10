@@ -67,7 +67,11 @@ export class OrganizerComponent implements OnInit {
 
     const task: Task = {
       title,
-      date: this.dateManagerService.date.value.format('DD-MM-YYYY'),
+      date: {
+        day: this.dateManagerService.date.value.format('DD'),
+        month: this.dateManagerService.date.value.format('MM'),
+        year: this.dateManagerService.date.value.format('YYYY'),
+      },
     };
 
     this.tasksService.create(task).subscribe(t => {
