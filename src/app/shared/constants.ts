@@ -1,4 +1,5 @@
 export const REMOVE = 'Видалити';
+export const REMOVE_ALL_TASKS = 'Очистити список';
 export const ORGANIZER = 'Органайзер';
 export const ADD_NEW_TASK = 'Додати справу';
 export const NO_TASKS = 'Справ немає';

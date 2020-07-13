@@ -5,7 +5,7 @@ import {TasksService} from '../shared/services/tasks.service';
 import {Task} from '../shared/interfaces/task';
 import {switchMap} from 'rxjs/operators';
 import {
-  REMOVE,
+  REMOVE_ALL_TASKS,
   ORGANIZER,
   ADD_NEW_TASK,
   NO_TASKS,
@@ -26,7 +26,7 @@ import {NotificationsService} from '../shared/services/notifications.service';
   styleUrls: ['./organizer.component.scss']
 })
 export class OrganizerComponent implements OnInit {
-  textRemove = REMOVE;
+  textRemoveAll = REMOVE_ALL_TASKS;
   textOrganizer = ORGANIZER;
   textAddNewTask = ADD_NEW_TASK;
   textNoTasks = NO_TASKS;
@@ -77,6 +77,7 @@ export class OrganizerComponent implements OnInit {
     this.tasksService.create(task).subscribe(t => {
         this.notificationService.showPopup('success', this.popupTitleSuccess, this.popupMessageSaveTaskSuccess);
         this.tasksList.insertTask(t);
+        this.dateManagerService.selectDay(this.dateManagerService.date.value);
         this.form.reset();
       }, () => this.notificationService.showPopup('error', this.popupTitleFail, this.popupMessageSaveTaskFail)
     );
@@ -86,6 +87,7 @@ export class OrganizerComponent implements OnInit {
     this.tasksService.removeAll(this.dateManagerService.date.value).subscribe(() => {
         this.tasksList.clearAll();
         this.notificationService.showPopup('success', this.popupTitleSuccess, this.popupMessageDeleteAllSuccess);
+        this.dateManagerService.selectDay(this.dateManagerService.date.value);
       }, () => this.notificationService.showPopup('error', this.popupTitleFail, this.popupMessageDeleteAllFail)
     );
   }
