@@ -22,7 +22,7 @@ import {TasksService} from '../shared/services/tasks.service';
 export class CalendarComponent implements OnInit {
   mainCalendar: Week[];
   daysOfWeek: string[] = [MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY];
-  tasksPerMonth = [];
+  tasksPerMonth = {};
 
   constructor(
     private dateManagerService: DateManagerService,
@@ -31,7 +31,7 @@ export class CalendarComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.dateManagerService.date.subscribe(this.createCalendar.bind(this));
+    this.dateManagerService.date.subscribe(this.checkExistingTasks.bind(this));
   }
 
   private checkExistingTasks(): void {
@@ -41,8 +41,9 @@ export class CalendarComponent implements OnInit {
           this.tasksPerMonth = response.reduce((result, item) => {
             result[item] = item;
             return result;
-          }, {});
+          }, {chosenDate: this.dateManagerService.date.value.format('YYYY-MM')});
         }
+        this.createCalendar(this.dateManagerService.date.value);
       }
     );
   }
@@ -63,7 +64,8 @@ export class CalendarComponent implements OnInit {
             const active = moment().isSame(value, 'date');
             const disabled = !now.isSame(value, 'month');
             const selected = now.isSame(value, 'date');
-            const hasTasks = this.tasksPerMonth[value.format('DD')] > 0;
+            const hasTasks = this.tasksPerMonth[value.format('DD')] > 0
+              && this.tasksPerMonth['chosenDate'] === date.format('YYYY-MM');
 
             return {
               value,

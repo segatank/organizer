@@ -1,6 +1,6 @@
 <section>
   <header class="text-center">
-    {{textOrganizer}} <strong>{{dateManagerService.date | async | moment: 'DD-MM-YYYY' }}</strong>
+    {{textOrganizer}} <strong>{{dateManagerService.selectedDate | async | moment: 'DD-MM-YYYY' }}</strong>
     <button
       *ngIf="tasksList.listOfTasks.length"
       class="btn btn-remove round-b el-fr"

@@ -8,6 +8,7 @@ import {BehaviorSubject} from 'rxjs';
 })
 export class DateManagerService {
   public date: BehaviorSubject<moment.Moment> = new BehaviorSubject(moment().locale('uk'));
+  public selectedDate: BehaviorSubject<moment.Moment> = new BehaviorSubject(moment().locale('uk'));
 
   changeDate(value: number, monthYear: moment.DurationInputArg2): void {
     const newDate = this.date.value.add(value, monthYear);
@@ -20,9 +21,11 @@ export class DateManagerService {
       month: date.month(),
     });
     this.date.next(value);
+    this.selectedDate.next(value.clone());
   }
 
   showToday(): void {
     this.date.next(moment().locale('uk'));
+    this.selectedDate.next(moment().locale('uk'));
   }
 }

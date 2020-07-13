@@ -12,7 +12,7 @@
       <td
         *ngFor="let day of week.days"
         [class.disabled]="day.disabled"
-        [class.hasTasks]="day.hasTasks"
+        [class.has-tasks]="day.hasTasks"
         (click)="selectDay(day.value)"
       >
         <span
@@ -21,6 +21,7 @@
         >
           {{day.value | moment:'DD'}}
         </span>
+        <span *ngIf="day.hasTasks" class="material-icons marked-day">bookmark</span>
       </td>
     </tr>
   </tbody>

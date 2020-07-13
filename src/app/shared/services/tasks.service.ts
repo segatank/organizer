@@ -24,7 +24,7 @@ export class TasksService {
       );
   }
 
-  public getDaysWithTasksForMonth(date: moment.Moment): Observable<any> {
+  public getDaysWithTasksForMonth(date: moment.Moment): Observable<string[]> {
     return this.http
       .get<Task[]>(`${TasksService.databaseUrl}/${date.format('YYYY')}/${date.format('MM')}.json`)
       .pipe(

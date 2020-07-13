@@ -2,6 +2,8 @@ table {
   width: 100%;
   margin-bottom: 1rem;
   border: .1rem solid #000;
+  border-collapse: separate;
+  border-spacing: 0.4rem;
 
   td, th {
     border: 1px solid #000;
@@ -35,7 +37,13 @@ table {
     color: #76ead7;
   }
 
-  .hasTasks {
-    background-color: steelblue;
+  .has-tasks {
+    position: relative;
+
+    span.marked-day {
+      position: absolute;
+      top: -0.4rem;
+      right: 0;
+    }
   }
 }
