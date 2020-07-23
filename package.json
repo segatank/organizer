@@ -6,10 +6,12 @@
     "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
+    "deploy": "gh-pages -d dist/organizer",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
   "private": true,
+  "homepage": "https://segatank.github.io/organizer",
   "dependencies": {
     "@angular/animations": "~10.0.2",
     "@angular/common": "~10.0.2",
