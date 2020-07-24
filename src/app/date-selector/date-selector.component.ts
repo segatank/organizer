@@ -23,7 +23,7 @@ export class DateSelectorComponent {
   today = TODAY;
 
   constructor(
-    private dateManagerService: DateManagerService,
+    public dateManagerService: DateManagerService,
   ) {
   }
 

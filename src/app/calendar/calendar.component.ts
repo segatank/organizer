@@ -60,12 +60,13 @@ export class CalendarComponent implements OnInit {
         days: Array(7)
           .fill(0)
           .map(() => {
+            const chosenDate = 'chosenDate';
             const value = date.add(1, 'day').clone();
             const active = moment().isSame(value, 'date');
             const disabled = !now.isSame(value, 'month');
             const selected = now.isSame(value, 'date');
             const hasTasks = this.tasksPerMonth[value.format('DD')] > 0
-              && this.tasksPerMonth['chosenDate'] === date.format('YYYY-MM');
+              && this.tasksPerMonth[chosenDate] === date.format('YYYY-MM');
 
             return {
               value,
